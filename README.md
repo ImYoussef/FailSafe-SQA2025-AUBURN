@@ -1,2 +1,5 @@
 # FailSafe-SQA2025-AUBURN
-COMP5710 Group Project
+Team Name: FailSafe
+Team Members: Youssef Mousallam
+              Adrian Rushing
+              Cameron Kasprzak
