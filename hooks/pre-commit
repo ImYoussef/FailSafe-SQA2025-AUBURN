@@ -2,6 +2,7 @@ files=$(git diff --cached --name-only --diff-filter=ACM | grep '\.py$')
 
 if [ ! -e "$files" ]; then
   echo "No python files committed."
+  exit 0
 fi 
 
 echo "Searching for vulnerabilities in committed files..."
