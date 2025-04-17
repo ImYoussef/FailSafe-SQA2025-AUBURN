@@ -1,0 +1,18 @@
+files=$(git diff --cached --name-only --diff-filter=ACM | grep '\.py$')
+
+echo "Searching for vulnerabilities in committed files..."
+
+#name the file based on system time of commit
+#bandit -f csv -o '$((date +"%T")).csv' $files
+time=$(date +"%Y-%m-%d_%T")
+bandit -f csv -o "report_$time.csv" $files
+
+if [ $? -ne 0]; then
+  echo "Due to the presence of security issues, commit has been denied. See $(date +"%T") for details."
+  cat "report_$time.csv"
+  #mv "report_$time.csv" ./reports
+  #git commit -m ""
+fi
+  
+
+exit 0
