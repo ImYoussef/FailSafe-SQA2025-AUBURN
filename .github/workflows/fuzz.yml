@@ -13,6 +13,7 @@ jobs:
       run: |
         python3 -m pip install --upgrade pip
         pip install -r KubeSec/KubeSec-master/requirements.txt
+        python -m pip install --index-url https://software.repos.intel.com/python/pypi --extra-index-url https://pypi.org/simple mkl_fft
     - name: Run fuzz and save crash errors
       run: |
         python3 fuzz.py > output.log 2>&1 > output.log
