@@ -22,4 +22,4 @@ jobs:
     
     - name: Run fuzz and save crash errors
       run: |
-        python3 fuzz.py > output.log 2>&1 > output.log
+        python3 fuzz.py > output.log 2>&1
