@@ -16,3 +16,5 @@ def giveMeLoggingObject():
     # Creating and returning the logger object
     loggerObj = logging.getLogger('forensic-logger')
     return loggerObj
+-e 
+# Automated Comment

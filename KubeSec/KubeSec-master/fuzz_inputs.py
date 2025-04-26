@@ -287,4 +287,5 @@ if __name__ == "__main__":
         print(f"{i+1}. {input_str} (length: {len(input_str)})")
         print(f"   Unicode points: {' '.join([f'U+{ord(c):04X}' for c in input_str])}")
         print(f"   Character categories: {' '.join([unicodedata.category(c) for c in input_str])}")
-        print() 
+        print() -e 
+# Automated Comment
