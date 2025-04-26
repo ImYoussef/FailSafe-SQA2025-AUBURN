@@ -19,6 +19,9 @@ def getYAMLFiles(path_to_dir):
     return valid_ 
 
 def constructHelmString(hiera_tuple): 
+    if not isinstance(hiera_tuple, tuple):
+        print("Input for constructHelmString must be a tuple.")
+        return 0
     str2ret  = constants.YAML_SKIPPING_TEXT 
     upper_key, key, _ = hiera_tuple 
     if ( upper_key != key  ):
