@@ -22,11 +22,11 @@ This section of the report contains screenshots and snippets of log files that d
 
 ### scanUserNameFuzzer()
 
-The _scanUserNameFuzzer()_ method in _scanner.py_ looks through an array of user names to see if they are valid. If they meet a series of conditions then they are appended to a list of hard-coded unames to be output at the end of the method. The function would crash when val_list was none, so to prevent because that object is not iterable.
+The scanUserNameFuzzer() method in scanner.py looks through an array of user names to see if they are valid. If they meet a series of conditions then they are appended to a list of hard-coded unames to be output at the end of the method. The function would crash when val_list was none, so to prevent because that object is not iterable.
 
-### ()
+### checkIfValidK8SYamlFuzzer()
 
-The _scanUserNameFuzzer()_ method in _scanner.py_ looks through an array of user names to see if they are valid. If they meet a series of conditions then they are appended to a list of hard-coded unames to be output at the end of the method. The function would crash when val_list was none, so to prevent because that object is not iterable.
+The checkIfValidK8SYamlFuzzer() method in parser.py takes in a file path to a kubernetes yaml and checks if it is valid. Thhis failed when the file did not exist, so to make it resistant to this I added a series of checks to ensure it was a string for a path and that it was a file that existed.
 
 ### constructHelmString() - _Cameron Kapsrzak_
 
