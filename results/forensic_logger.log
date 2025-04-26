@@ -1,0 +1,17 @@
+2025-04-26 14:27:20,213 - INFO - fuzzer - Running scanUserNameFuzzer()
+2025-04-26 14:27:20,214 - INFO - fuzzer - None
+2025-04-26 14:27:20,214 - INFO - fuzzer - Running checkIfValidK8SYamlFuzzer()
+2025-04-26 14:27:20,214 - INFO - fuzzer - None
+2025-04-26 14:27:20,214 - INFO - fuzzer - Logging constructHelmStringFuzzer() from graphtaint.py:
+2025-04-26 14:27:20,214 - ERROR - fuzzer - An error occurred:
+Traceback (most recent call last):
+  File "/home/adrian/SQA/FailSafe-SQA2025-AUBURN/KubeSec/KubeSec-master/fuzz.py", line 28, in fuzzer
+    logger.info("Result %s", constructHelmStringFuzzer())
+                             ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/home/adrian/SQA/FailSafe-SQA2025-AUBURN/KubeSec/KubeSec-master/graphtaintFuzzer.py", line 7, in constructHelmStringFuzzer
+    print("Trying input: 123", constructHelmString(123))
+                               ~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/home/adrian/SQA/FailSafe-SQA2025-AUBURN/KubeSec/KubeSec-master/graphtaint.py", line 23, in constructHelmString
+    upper_key, key, _ = hiera_tuple
+    ^^^^^^^^^^^^^^^^^
+TypeError: cannot unpack non-iterable int object
