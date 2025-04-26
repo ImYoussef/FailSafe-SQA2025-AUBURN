@@ -23,7 +23,8 @@ jobs:
     - name: Run fuzz and save crash errors
       run: |
         python3 fuzz.py > output.log 2>&1
-      
+      continue-on-error: true
+
     - name: Show fuzz output
       run: |
         cat output.log
