@@ -69,6 +69,7 @@ def formatException(eText):
 
 
 def scanUserNameFuzzer():
+    print("Fuzzing scanUserName() from scanner.py")
     test_cases = [
         (123, ["admin", "root"]),
         ("user_name", "not_a_list"),
@@ -89,6 +90,7 @@ def scanUserNameFuzzer():
 
 
 def checkIfValidK8SYamlFuzzer():
+    print("Fuzzing checkIfValidK8SYaml() from parser.py")
     test_cases = [
         None,
         123,
