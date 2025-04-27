@@ -38,6 +38,9 @@ The _constructHelmString()_ method in _graphtaint.py_ takes a tuple as an input 
 
 The _checkIfWeirdYAML()_ method in _parser.py_ iterates through a list of yaml scripts and checks them against a known list of 'weird paths'. To fuzz the file we provided inputs that were not in a list format, and the method crashed when it tried to iterate through non-list variables. TO prevent this crashing, I created a check that would exit the function with a message if the input was not a list object.
 
+### scanForDefaultNamespace() - _Youssef Mousallam_
+The scanForDefaultNamespace method checks a Kubernetes YAML file to detect if it improperly uses the default namespace and logs a security finding if found. I fuzzed it by preparing invalid, unexpected, or malformed inputs like non-string paths, corrupted YAML content, wrong data types from parser functions, and missing expected keys to see if the method would crash or behave incorrectly. To fix it I added strict type checks, wrapped risky operations in try-except blocks, and validated the structures returned from parser functions to prevent crashes and safely handle bad inputs.
+
 ## Lessons Learned
 
 The knowledge gained from the lesson workshops has been immensely beneficial. It includes learning to identify security misconfigurations in Kubernetes configuration files using existing tolls, employing the ‘bandit’ command for generating reports on security vulnerabilities, and implementing Git Hooks to initiate static analysis on widely used repositories. Additionally, the project enhanced my understanding of running Docker images and utilizing Vault for substituting hard-coded passwords with more secure options.
