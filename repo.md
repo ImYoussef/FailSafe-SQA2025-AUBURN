@@ -10,7 +10,7 @@ All source files, commit history, changelogs, output files as well as additional
 
 ### Execution of Git Hooks
 
-The following artifacts are designed to provide evidence of successful integration and validation of requirement “4a. Create a Git Hook that will run and report all security weaknesses in the project in a CSV file whenever a Python file is changed and committed. (10%)”. As the pre-commit hook is a client-side hook, the contents of it are not stored on the Team’s Repository per standard Git practice. Instead the pre-commit hook file is simply uploaded in a separate folder labeled “hooks”
+The following artifacts are designed to provide evidence of successful integration and validation of requirement “4a. Create a Git Hook that will run and report all security weaknesses in the project in a CSV file whenever a Python file is changed and committed. (10%)”. As the pre-commit hook is a client-side hook, the contents of it are not stored on the Team’s Repository per standard Git practice. Instead the pre-commit hook file is simply uploaded in a separate folder labeled “hooks”. The result of this hooks can be found in https://github.com/ImYoussef/FailSafe-SQA2025-AUBURN/tree/main/results .
 
 ### Execution of Fuzzing
 
