@@ -209,12 +209,4 @@ def mineNetPolGraph( script_, dict_y, src_val, src_keys ):
     return lis2ret 
 
 
-# if __name__=='__main__':
--e 
-# Automated Comment
--e 
-# Automated Comment - 6:50PM
--e 
-# Automated Comment - 6:53PM
--e 
-# Automated Comment - 7:02PM
+#
