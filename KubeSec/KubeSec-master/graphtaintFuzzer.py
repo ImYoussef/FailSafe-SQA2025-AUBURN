@@ -16,11 +16,3 @@ def getHelmTemplateContentFuzzer():
     print("Fuzzing getHelmTemplateContent() from graphtaint.py")
     print("Trying bad file path", getHelmTemplateContent("not/a/file"))
     print("Trying non-file path", getHelmTemplateContent("not-a-file"))
--e 
-# Automated Comment
--e 
-# Automated Comment - 6:50PM
--e 
-# Automated Comment - 6:53PM
--e 
-# Automated Comment - 7:02PM
