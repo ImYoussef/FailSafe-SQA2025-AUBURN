@@ -14,7 +14,6 @@ jobs:
     - name: Upgrade pip, setuptools, wheel
       run: |
         python -m pip install --upgrade pip setuptools wheel
-
     - name: Install dependencies
       run: |
         pip install -r KubeSec/KubeSec-master/requirements.txt
@@ -22,8 +21,8 @@ jobs:
     
     - name: Run fuzz and save crash errors
       run: |
-        python3 KubeSec/KubeSec-master/fuzz.py > output.log 2>&1
+        python3 KubeSec/KubeSec-master/fuzz.py > results/output.log 2>&1
         
     - name: Show fuzz output
       run: |
-        cat output.log
+        cat results/output.log
