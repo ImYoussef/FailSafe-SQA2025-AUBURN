@@ -499,11 +499,3 @@ def getSingleDict4MultiDocs(lis_dic):
 if __name__ == "__main__":
     yaml_path = pl.Path(base_path, "test.yaml")
     dic_lis = loadMultiYAML(yaml_path)
--e 
-# Automated Comment
--e 
-# Automated Comment - 6:50PM
--e 
-# Automated Comment - 6:53PM
--e 
-# Automated Comment - 7:02PM
