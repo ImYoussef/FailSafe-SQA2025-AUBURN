@@ -26,4 +26,4 @@ jobs:
         
     - name: Show fuzz output
       run: |
-        cat results/output.log
+        cat output.log
