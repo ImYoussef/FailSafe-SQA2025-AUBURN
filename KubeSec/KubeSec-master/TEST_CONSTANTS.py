@@ -142,11 +142,4 @@ multi_doc_script1   = 'TEST_ARTIFACTS/multi.doc.yaml'
 multi_doc_script2   = 'TEST_ARTIFACTS/empty.yml'
 
 
-_common_error_string = 'SHOULD BE '-e 
-# Automated Comment
--e 
-# Automated Comment - 6:50PM
--e 
-# Automated Comment - 6:53PM
--e 
-# Automated Comment - 7:02PM
+_common_error_string = 'SHOULD BE '
