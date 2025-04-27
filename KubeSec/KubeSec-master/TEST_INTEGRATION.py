@@ -116,11 +116,4 @@ class TestIntegrationCount( unittest.TestCase ):
         self.assertEqual(oracle_value, within_sec_cnt ,  TEST_CONSTANTS._common_error_string + str(oracle_value)  )   
 
 if __name__ == '__main__':
-    unittest.main()-e 
-# Automated Comment
--e 
-# Automated Comment - 6:50PM
--e 
-# Automated Comment - 6:53PM
--e 
-# Automated Comment - 7:02PM
+    unittest.main()
