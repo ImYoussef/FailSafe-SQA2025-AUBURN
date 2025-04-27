@@ -26,14 +26,21 @@ def checkIfWeirdYAML(yaml_script):
     """
     to filter invalid YAMLs such as ./github/workflows/
     """
-    if not isinstance(yaml_script, list):
-        print("Not a valid input for checkIfWeirdYAML")
-
+    try:
+        if not isinstance(yaml_script, list):
+            print("Not a valid input for checkIfWeirdYAML")
+            return 0
+        
+        # Extra check: make sure all elements are strings
+        if not all(isinstance(x_, str) for x_ in yaml_script):
+            print("List contains non-string elements in checkIfWeirdYAML")
+            return 0
+        
+        val = any(x_ in yaml_script for x_ in constants.WEIRD_PATHS)
+        return val
+    except Exception as e:
+        print(f"Exception caught in checkIfWeirdYAML: {e}")
         return 0
-    val = False
-    if any(x_ in yaml_script for x_ in constants.WEIRD_PATHS):
-        val = True
-    return val
 
 
 def keyMiner(dic_, value):
