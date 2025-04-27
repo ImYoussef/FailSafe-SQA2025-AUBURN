@@ -642,69 +642,88 @@ def scanForMissingSecurityContext(path_scrpt):
 
 def scanForDefaultNamespace(path_scrpt):
     dic, lis = {}, []
-    if parser.checkIfValidK8SYaml(path_scrpt):
-        cnt = 0
-        dict_as_list = parser.loadMultiYAML(path_scrpt)
-        yaml_di = parser.getSingleDict4MultiDocs(dict_as_list)
-        nspace_vals = []
-        parser.getValsFromKey(yaml_di, constants.NAMESPACE_KW, nspace_vals)
-        # print(nspace_vals)
-        """
-        we are not going to process list of dicts 
-        """
-        nspace_vals = [x_ for x_ in nspace_vals if isinstance(x_, str)]
-        unique_nspace_vals = list(np.unique(nspace_vals))
-        if (len(unique_nspace_vals) == 1) and (
-            unique_nspace_vals[0] == constants.DEFAULT_KW
-        ):
-            key_lis = parser.keyMiner(yaml_di, constants.DEFAULT_KW)
-            if isinstance(key_lis, list):
-                if len(key_lis) > 0:
-                    all_values = list(parser.getValuesRecursively(yaml_di))
-                    cnt += 1
+    try:
+        if not isinstance(path_scrpt, str):
+            print("Invalid path provided to scanForDefaultNamespace")
+            return dic
 
-                    # Lines for SARIF output
-                    line_number = parser.show_line_for_paths(
-                        path_scrpt, constants.NAMESPACE_KW
-                    )
-                    for line in line_number:
-                        result = Result(
-                            rule_id="SLIKUBE_UNLISTED_01",
-                            rule_index=11,
-                            level="error",
-                            attachments=[],
-                            message=Message(text=" Use of Default Namespace"),
-                        )
-                        location = Location(
-                            physical_location=PhysicalLocation(
-                                artifact_location=ArtifactLocation(uri=path_scrpt),
-                                region=Region(start_line=line),
-                            )
-                        )
-                        result.locations = [location]
-                        run.results.append(result)
-                    prop_value = constants.YAML_SKIPPING_TEXT
-                    if constants.DEPLOYMENT_KW in all_values:
-                        prop_value = constants.DEPLOYMENT_KW
-                        lis.append(prop_value)
-                    elif constants.POD_KW in all_values:
-                        prop_value = constants.POD_KW
-                        lis.append(prop_value)
-                    else:
-                        holder_ = []
-                        parser.getValsFromKey(yaml_di, constants.KIND_KEY_NAME, holder_)
-                        if constants.K8S_SERVICE_KW in holder_:
-                            srv_val_li_ = []
-                            parser.getValsFromKey(
-                                yaml_di, constants.K8S_APP_KW, srv_val_li_
-                            )
-                            for srv_val in srv_val_li_:
-                                lis = graphtaint.mineServiceGraph(
-                                    path_scrpt, yaml_di, srv_val
+        if parser.checkIfValidK8SYaml(path_scrpt):
+            cnt = 0
+            try:
+                dict_as_list = parser.loadMultiYAML(path_scrpt)
+                if not isinstance(dict_as_list, list):
+                    print("Invalid YAML structure after loadMultiYAML")
+                    return dic
+
+                yaml_di = parser.getSingleDict4MultiDocs(dict_as_list)
+                if not isinstance(yaml_di, dict):
+                    print("Invalid structure after getSingleDict4MultiDocs")
+                    return dic
+
+                nspace_vals = []
+                parser.getValsFromKey(yaml_di, constants.NAMESPACE_KW, nspace_vals)
+
+                nspace_vals = [x_ for x_ in nspace_vals if isinstance(x_, str)]
+                unique_nspace_vals = list(np.unique(nspace_vals))
+
+                if (len(unique_nspace_vals) == 1) and (unique_nspace_vals[0] == constants.DEFAULT_KW):
+                    key_lis = parser.keyMiner(yaml_di, constants.DEFAULT_KW)
+                    if isinstance(key_lis, list) and len(key_lis) > 0:
+                        all_values = list(parser.getValuesRecursively(yaml_di))
+
+                        cnt += 1
+
+                        try:
+                            line_number = parser.show_line_for_paths(path_scrpt, constants.NAMESPACE_KW)
+                            if not isinstance(line_number, list):
+                                line_number = []
+
+                            for line in line_number:
+                                result = Result(
+                                    rule_id="SLIKUBE_UNLISTED_01",
+                                    rule_index=11,
+                                    level="error",
+                                    attachments=[],
+                                    message=Message(text="Use of Default Namespace"),
                                 )
+                                location = Location(
+                                    physical_location=PhysicalLocation(
+                                        artifact_location=ArtifactLocation(uri=path_scrpt),
+                                        region=Region(start_line=line),
+                                    )
+                                )
+                                result.locations = [location]
+                                run.results.append(result)
+                        except Exception as e:
+                            print(f"Exception while handling SARIF results: {e}")
 
-                    dic[cnt] = lis
-    # print(dic)
+                        prop_value = constants.YAML_SKIPPING_TEXT
+                        if constants.DEPLOYMENT_KW in all_values:
+                            prop_value = constants.DEPLOYMENT_KW
+                            lis.append(prop_value)
+                        elif constants.POD_KW in all_values:
+                            prop_value = constants.POD_KW
+                            lis.append(prop_value)
+                        else:
+                            holder_ = []
+                            parser.getValsFromKey(yaml_di, constants.KIND_KEY_NAME, holder_)
+                            if constants.K8S_SERVICE_KW in holder_:
+                                srv_val_li_ = []
+                                parser.getValsFromKey(yaml_di, constants.K8S_APP_KW, srv_val_li_)
+                                for srv_val in srv_val_li_:
+                                    try:
+                                        mined_list = graphtaint.mineServiceGraph(path_scrpt, yaml_di, srv_val)
+                                        if isinstance(mined_list, list):
+                                            lis.extend(mined_list)
+                                    except Exception as e:
+                                        print(f"Error mining service graph: {e}")
+
+                        dic[cnt] = lis
+            except Exception as e:
+                print(f"Error inside scanForDefaultNamespace parsing block: {e}")
+    except Exception as e:
+        print(f"Unhandled exception in scanForDefaultNamespace: {e}")
+
     return dic
 
 
