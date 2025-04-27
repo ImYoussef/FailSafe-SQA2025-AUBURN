@@ -1583,12 +1583,3 @@ if __name__ == "__main__":
     a, b = runScanner(dir2scan)
     with open("test-scanner.sarif", "w") as f:
         f.write(b)
-
--e 
-# Automated Comment
--e 
-# Automated Comment - 6:50PM
--e 
-# Automated Comment - 6:53PM
--e 
-# Automated Comment - 7:02PM
