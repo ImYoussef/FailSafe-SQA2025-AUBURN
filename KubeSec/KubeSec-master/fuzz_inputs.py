@@ -287,11 +287,4 @@ if __name__ == "__main__":
         print(f"{i+1}. {input_str} (length: {len(input_str)})")
         print(f"   Unicode points: {' '.join([f'U+{ord(c):04X}' for c in input_str])}")
         print(f"   Character categories: {' '.join([unicodedata.category(c) for c in input_str])}")
-        print() -e 
-# Automated Comment
--e 
-# Automated Comment - 6:50PM
--e 
-# Automated Comment - 6:53PM
--e 
-# Automated Comment - 7:02PM
+        print()
